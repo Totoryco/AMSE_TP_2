@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jeu_taquin/tiles.dart';
+import 'package:taquin/tiles.dart';
 
 void main() => runApp(MyApp());
 
