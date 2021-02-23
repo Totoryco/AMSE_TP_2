@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jeu_taquin/main.dart';
+import 'package:taquin/main.dart';
 import 'dart:math';
 
 List<Widget> grid;
