@@ -6,7 +6,7 @@ Web Mobile project by VINCHON Thomas & BARGE Antony.
 
 Tout d'abord il suffit d'installer le projet, qui se trouve dans la branche main, sur votre PC.
 
-Pour cela, il faut tout simplement lancer un émulateur de téléphone puis de rentrer les commandes suivantes dans un terminal:
+Pour cela, il faut tout simplement lancer un émulateur de téléphone puis rentrer les commandes suivantes dans un terminal:
 
 ```bash
 git clone https://github.com/Totoryco/AMSE_TP_2.git
