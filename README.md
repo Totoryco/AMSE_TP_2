@@ -29,6 +29,6 @@ Voici, un petit aperçu des fonctionnalités de l'application :
 - Afficher un compteur de déplacements
 - Indiquer au joueur lorsqu'il a gagné
 - Annuler le dernier coup joué (autant de coups que l'on souhaite en appuyant plusieurs fois d'affilée),
-- Recommencer le niveau
+- Recomélanger la grille
 
 
