@@ -9,7 +9,7 @@ Tout d'abord il suffit d'installer le projet, qui se trouve dans la branche main
 Pour cela, il faut tout simplement de lancer un émulateur de téléphone puis de rentrer les commandes suivantes dans un terminal:
 
 ```bash
-git clone http://www.github.com/Totoryco/AMSE.git
+git clone https://github.com/Totoryco/AMSE_TP_2.git
 flutter create .
 flutter run
 ```
