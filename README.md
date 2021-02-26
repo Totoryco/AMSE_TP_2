@@ -10,9 +10,9 @@ Pour cela, il faut tout simplement lancer un émulateur de téléphone puis de r
 
 ```bash
 git clone https://github.com/Totoryco/AMSE_TP_2.git
-flutter create .
 cd AMSE_TP_2
 cd taquin
+flutter create .
 flutter run
 ```
 
