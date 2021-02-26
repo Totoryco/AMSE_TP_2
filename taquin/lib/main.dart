@@ -10,19 +10,16 @@ String _title = "Jeu de Taquin";
 bool gameStarted = false;
 _HomeScreenState homeState;
 int indtabBar = 0;
+int difficulty = 50;
+List<bool> isSelected = [true, false, false];
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: '/home',
-      routes: {
-      // When navigating to the "/" route, build the FirstScreen widget.
-      '/home': (context) => HomeScreen(),
-      // When navigating to the "/second" route, build the SecondScreen widget.
-      '/game': (context) => Game(),
-      },
-      );
+      title: 'Jeu de Taquin',
+      home: HomeScreen(),
+    );
   }
 }
 
@@ -45,8 +42,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     
     final tabBar = new TabBar(
-      indicatorColor: Colors.red,
-      labelColor: Colors.red,
+      indicatorColor: Colors.blue,
+      labelColor: Colors.blue,
       onTap: _onItemTappedForTabBar,
       tabs: <Widget>[
         new Tab(
@@ -78,24 +75,96 @@ class _HomeScreenState extends State<HomeScreen> {
                         Gameboard(),
                         Visibility(
                           visible: !gameStarted,
-                          child :Column(children: [
-                            Text('Slide to choose your size. Current Size : $_currentSliderValue'),
-                            Padding( padding: EdgeInsets.only(bottom: 8),
-                              child: Slider(
-                                value: _currentSliderValue,
-                                min: 3,
-                                max: 9,
-                                divisions: 6,
-                                label: _currentSliderValue.round().toString(),
-                                onChanged: (double value) {
-                                  setState(() {
-                                    _currentSliderValue = value;
-                                    sizeSelection(_currentSliderValue);
-                                  });
-                                }
-                              )
-                            )
-                        ],)
+                          child : Row(children: [
+                            Text('   Difficulty   :'), 
+                            ToggleButtons(children: [
+                              Padding( 
+                                padding: EdgeInsets.only(bottom: 4),
+                                child: SizedBox(
+                                  height: 64,
+                                  width: MediaQuery.of(context).size.width/4,
+                                  child: Container(
+                                    margin: EdgeInsets.all(8),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.white.withOpacity(0.2)),
+                                      borderRadius: BorderRadius.circular(8),
+                                      color: Colors.grey.withOpacity(0.2)
+                                    ),
+                                  child: Center(child: Text('Easy')),
+                                    )
+                                  )
+                                ),
+                              Padding( 
+                                padding: EdgeInsets.only(bottom: 4),
+                                child: SizedBox(
+                                  height: 64,
+                                  width: MediaQuery.of(context).size.width/4,
+                                  child: Container(
+                                    margin: EdgeInsets.all(8),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.white.withOpacity(0.2)),
+                                      borderRadius: BorderRadius.circular(8),
+                                      color: Colors.grey.withOpacity(0.2)
+                                    ),
+                                  child: Center(child: Text('Normal')),
+                                    )
+                                  )
+                                ),
+                              Padding( 
+                                padding: EdgeInsets.only(bottom: 4),
+                                child: SizedBox(
+                                  height: 64,
+                                  width: MediaQuery.of(context).size.width/4,
+                                  child: Container(
+                                    margin: EdgeInsets.all(8),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.white.withOpacity(0.2)),
+                                      borderRadius: BorderRadius.circular(8),
+                                      color: Colors.grey.withOpacity(0.2)
+                                    ),
+                                  child: Center(child: Text('Difficult')),
+                                    )
+                                  )
+                                ),
+                              ],
+                              renderBorder: false,
+                              onPressed: (int index) {
+                                setState(() {
+                                  difficulty = (index+1)^2*50;
+                                  for (int buttonIndex = 0; buttonIndex < isSelected.length; buttonIndex++) {
+                                    if (buttonIndex == index) {
+                                      isSelected[buttonIndex] = true;
+                                    } else {
+                                      isSelected[buttonIndex] = false;
+                                    }
+                                  }
+                                });
+                              },
+                              isSelected: isSelected,
+                            ),
+                          ])
+                        ),
+                        Visibility(
+                          visible: !gameStarted,
+                          child : Padding(padding: EdgeInsets.only(bottom: 8.0),
+                              child: Row(children: [
+                                Text('   Size :'), 
+                                Container(width: MediaQuery.of(context).size.width - 50, child: Slider(
+                                  value: _currentSliderValue,
+                                  min: 3,
+                                  max: 9,
+                                  divisions: 6,
+                                  label: _currentSliderValue.round().toString(),
+                                  onChanged: (double value) {
+                                    setState(() {
+                                      _currentSliderValue = value;
+                                      sizeSelection(_currentSliderValue);
+                                    });
+                                  }
+                                )
+                                )
+                            ],)
+                          )
                         ),
                         Visibility(
                           visible: gameStarted,

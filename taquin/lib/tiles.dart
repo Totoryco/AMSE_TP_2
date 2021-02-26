@@ -5,6 +5,7 @@ import 'dart:math';
 List<Widget> grid;
 _GameboardState gameState;
 int emptyTile = 0;
+List<String> movesDone = [];
 
 
 class Tile extends StatelessWidget{
@@ -42,8 +43,8 @@ class Tile extends StatelessWidget{
                         Image.network('https://picsum.photos/512'): 
                         Container(
                           color: (sizeLen%2 == 0)?
-                          (colorEven(value))? Colors.black54:Colors.white54:
-                          (value%2 == 1)? Colors.black54:Colors.white54,
+                          (colorEven(value))? Colors.blue:Colors.blue[200]:
+                          (value%2 == 1)? Colors.blue:Colors.blue[200],
                           height: 512,
                           width: 512,
                         ),
@@ -175,12 +176,49 @@ class _GameboardState extends State<Gameboard> {
               child: !gameStarted ? Text('Start'): Text('Restart'),
                 color: Colors.grey.withOpacity(0.2),
                 onPressed: (){
-                  gameStarted = true;
                   homeState.setState(() {});
                   setState(() {melange();});
                 }
               )
             )
+          )
+        ),
+        Visibility(
+          visible: gameStarted,
+          child : Padding(padding: EdgeInsets.only(bottom: 8.0),
+            child: Row(children: [
+              Text('   Number of moves :  ${movesDone.length}'), 
+              Padding(child: Text('Go back:'), padding: EdgeInsets.only(left: 100)),
+              IconButton(
+                icon: Icon(Icons.settings_backup_restore),  
+                onPressed: (){
+                  setState(() {});
+                  if (movesDone.length != 0){
+                    var lastMove = movesDone.removeLast();
+                    if (lastMove == "Left"){
+                      swapTilesRight();
+                      print("right");
+                    }
+                    if (lastMove == "Right"){
+                      swapTilesLeft();
+                      print("left");
+                    }
+                    if (lastMove == "Up"){
+                      swapTilesDown();
+                      print("down");
+                    }
+                    if (lastMove == "Down"){
+                      swapTilesUp();
+                      print("up");
+                    }
+                    movesDone.removeLast();
+                  }
+                  else {
+                    print("You didn't even started the game...");
+                  }
+                }
+              )
+            ],)
           )
         )
     ],);
@@ -199,34 +237,89 @@ class _GameboardState extends State<Gameboard> {
     var temp = emptyTile;
     emptyTile = movedTile;
     movedTile = temp;
+
+    var win = true;
+    var comp = List.generate(sizeLen*sizeLen, (i) => i++);
+    for(var i in comp){
+      if (grid_value[i] != i){
+        win = false;
+      }
+    }
+
+    if(gameStarted && win){
+      return showDialog<void>(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('You win !!'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  Text('Congratulations, you won this game in ${movesDone.length} moves!'),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: Text('Replay'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  gameStarted = false;
+                  homeState.setState(() {});
+                  setState(() {melange();});
+                },
+              ),
+              TextButton(
+                child: Text('Menu'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  emptyTile = 0;
+                  gameStarted = false;
+                  grid_value = List.generate(sizeLen*sizeLen, (i) => i++);
+                  homeState.setState(() {});
+                  setState(() {});
+                },
+              ),
+            ],
+          );   
+        }
+      );       
+    }
   }
 
   swapTilesUp(){
     movedTile = emptyTile + sizeLen;
+    movesDone.add("Up");
     swapTiles();
   }
   swapTilesDown(){
     movedTile = emptyTile - sizeLen;
+    movesDone.add("Down");
     swapTiles();
   }
   swapTilesLeft(){
     movedTile = emptyTile + 1;
+    movesDone.add("Left");
     swapTiles();
   }
   swapTilesRight(){
     movedTile = emptyTile -1;
+    movesDone.add("Right");
     swapTiles();
   }
 
   void melange(){
     final random = new Random();
     int r = random.nextInt(4);
-    for(var i = 0; i<sizeLen*100; i++){
+    for(var i = 0; i<sizeLen*difficulty; i++){
       if ((r == 0) && (canSwipeUp())) {swapTilesUp();}
       if ((r == 1) && (canSwipeDown())) {swapTilesDown();}
       if ((r == 2) && (canSwipeRight())) {swapTilesRight();}
       if ((r == 3) && (canSwipeLeft())) {swapTilesLeft();}
       r = random.nextInt(4);
     }
+    gameStarted = true;
+    movesDone = [];
   }
 }
