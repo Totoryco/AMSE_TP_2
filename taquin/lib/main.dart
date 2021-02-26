@@ -78,10 +78,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           child : Row(children: [
                             Text('   Difficulty   :'), 
                             ToggleButtons(children: [
-                              Padding( 
-                                padding: EdgeInsets.only(bottom: 4),
-                                child: SizedBox(
-                                  height: 64,
+                              SizedBox(
+                                  height: 54,
                                   width: MediaQuery.of(context).size.width/4,
                                   child: Container(
                                     margin: EdgeInsets.all(8),
@@ -92,12 +90,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                   child: Center(child: Text('Easy')),
                                     )
-                                  )
                                 ),
-                              Padding( 
-                                padding: EdgeInsets.only(bottom: 4),
-                                child: SizedBox(
-                                  height: 64,
+                              SizedBox(
+                                  height: 54,
                                   width: MediaQuery.of(context).size.width/4,
                                   child: Container(
                                     margin: EdgeInsets.all(8),
@@ -108,12 +103,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                   child: Center(child: Text('Normal')),
                                     )
-                                  )
-                                ),
-                              Padding( 
-                                padding: EdgeInsets.only(bottom: 4),
-                                child: SizedBox(
-                                  height: 64,
+                                  ),
+                              SizedBox(
+                                  height: 54,
                                   width: MediaQuery.of(context).size.width/4,
                                   child: Container(
                                     margin: EdgeInsets.all(8),
@@ -124,7 +116,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                   child: Center(child: Text('Difficult')),
                                     )
-                                  )
                                 ),
                               ],
                               renderBorder: false,
@@ -146,8 +137,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         Visibility(
                           visible: !gameStarted,
-                          child : Padding(padding: EdgeInsets.only(bottom: 8.0),
-                              child: Row(children: [
+                          child : Row(children: [
                                 Text('   Size :'), 
                                 Container(width: MediaQuery.of(context).size.width - 50, child: Slider(
                                   value: _currentSliderValue,
@@ -164,17 +154,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                 )
                                 )
                             ],)
-                          )
                         ),
                         Visibility(
                           visible: gameStarted,
                           child : Padding( 
                             padding: EdgeInsets.only(bottom: 4),
                             child: SizedBox(
-                              height: 64,
+                              height: 44,
                               width: double.infinity,
                               child: Container(
-                                margin: EdgeInsets.all(8),
+                                margin: EdgeInsets.only(bottom: 8, left: 8, right: 8),
                                 decoration: BoxDecoration(
                                 border: Border.all(color: Colors.white.withOpacity(0.2)),
                                 borderRadius: BorderRadius.circular(8)

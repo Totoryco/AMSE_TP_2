@@ -161,13 +161,11 @@ class _GameboardState extends State<Gameboard> {
             }
           },
         ),
-        Padding( 
-          padding: EdgeInsets.only(bottom: 4),
-          child: SizedBox(
-            height: 64,
+        SizedBox(
+            height: 48,
             width: double.infinity,
             child: Container(
-              margin: EdgeInsets.all(8),
+              margin: EdgeInsets.only(left: 8, right: 8),
               decoration: BoxDecoration(
               border: Border.all(color: Colors.white.withOpacity(0.2)),
               borderRadius: BorderRadius.circular(8)
@@ -181,14 +179,13 @@ class _GameboardState extends State<Gameboard> {
                 }
               )
             )
-          )
         ),
         Visibility(
           visible: gameStarted,
           child : Padding(padding: EdgeInsets.only(bottom: 8.0),
             child: Row(children: [
               Text('   Number of moves :  ${movesDone.length}'), 
-              Padding(child: Text('Go back:'), padding: EdgeInsets.only(left: 100)),
+              Padding(child: Text('Go back:'), padding: EdgeInsets.only(left: 70)),
               IconButton(
                 icon: Icon(Icons.settings_backup_restore),  
                 onPressed: (){
