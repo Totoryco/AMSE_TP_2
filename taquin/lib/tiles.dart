@@ -171,7 +171,7 @@ class _GameboardState extends State<Gameboard> {
               borderRadius: BorderRadius.circular(8)
               ),
             child: MaterialButton(
-              child: !gameStarted ? Text('Start'): Text('Restart'),
+              child: !gameStarted ? Text('Start'): Text('Reshuffle'),
                 color: Colors.grey.withOpacity(0.2),
                 onPressed: (){
                   homeState.setState(() {});
