@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:taquin/tiles.dart';
+import 'package:taquin/exos/exo_1.dart';
+import 'package:taquin/exos/exo_2.dart';
+import 'package:taquin/exos/exo_3.dart';
+import 'package:taquin/exos/exo_4.dart';
+import 'package:taquin/exos/exo_5.dart';
+import 'package:taquin/exos/exo_6.dart';
 
 void main() => runApp(MyApp());
 
@@ -18,8 +24,20 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Jeu de Taquin',
-      home: HomeScreen(),
-    );
+      initialRoute: 'Exercice 3',
+        routes: {
+        '/home': (context) => HomeScreen(),
+        'Exercice 1': (context) => Exo1(),
+        'Exercice 2': (context) => Exo2(),
+        'Exercice 3': (context) => SelectionScreen(),
+        'Exercice 4': (context) => Exo4(),
+        'Exercice 5a': (context) => Exo5a(),
+        'Exercice 5b': (context) => Exo5b(),
+        'Exercice 5c': (context) => Exo5c(),
+        'Exercice 6a': (context) => Exo6a(),
+        'Exercice 6b': (context) => Exo6b(),
+        },
+      );
   }
 }
 
@@ -64,10 +82,14 @@ class _HomeScreenState extends State<HomeScreen> {
             home: DefaultTabController(
               length: 3, 
               child: new Scaffold(
-                appBar: AppBar(
+                appBar: AppBar( 
                   bottom: tabBar,
                   backgroundColor: Colors.black, 
-                  title: Center(child: Text(_title))
+                  title: Center(child: Text(_title)),
+                  leading: IconButton(
+                    icon: Icon(Icons.arrow_back, color: Colors.white),
+                    onPressed: () => Navigator.pop(context),
+                  )
                 ),
                 body: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -169,7 +191,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 borderRadius: BorderRadius.circular(8)
                                 ),
                               child: MaterialButton(
-                                child: Text('Return to main menu'),
+                                child: Text('Change mode'),
                                   color: Colors.grey.withOpacity(0.2),
                                   onPressed: (){
                                     emptyTile = 0;
@@ -179,7 +201,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     setState(() {});
                                   }
                                 )
-                              )
+                              ),
                             )
                           )
                         )
@@ -202,43 +224,4 @@ class _HomeScreenState extends State<HomeScreen> {
       indtabBar = index;
     });
   }
-}
-
-class Game extends StatefulWidget {
-  const Game({ Key key }) : super(key: key);
-
-  @override
-  _GameState createState() => _GameState();
-}
-
-class _GameState extends State<Game> {
-
-  @override
-    void initState() {
-        super.initState();
-    }
-
-  @override
-  Widget build(BuildContext context) {
-
-        return MaterialApp(
-            title: _title,
-            theme: ThemeData.dark(),
-            home: Scaffold(
-                appBar: AppBar(title: Center(child: Text(_title))),
-                body: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                        MaterialButton(
-                          child: Text('start'),
-                            color: Colors.grey.withOpacity(0.2),
-                            onPressed: (){
-                          }
-                        ),
-                        Gameboard(),
-                    ]
-                ),
-            )
-        );
-    }
 }

@@ -14,7 +14,7 @@ class Tile extends StatelessWidget{
 
   Widget build(BuildContext context) {
   return empty ?
-  FittedBox(
+    FittedBox(
           fit: BoxFit.fill,
             child: ClipRect(
               child: Container(
@@ -177,7 +177,7 @@ class _GameboardState extends State<Gameboard> {
                   homeState.setState(() {});
                   setState(() {melange();});
                 }
-              )
+                )
             )
         ),
         Visibility(
@@ -211,7 +211,7 @@ class _GameboardState extends State<Gameboard> {
                     movesDone.removeLast();
                   }
                   else {
-                    print("You didn't even started the game...");
+                    print("You didn't even start the game...");
                   }
                 }
               )
@@ -268,7 +268,7 @@ class _GameboardState extends State<Gameboard> {
                 },
               ),
               TextButton(
-                child: Text('Menu'),
+                child: Text('Change Mode'),
                 onPressed: () {
                   Navigator.of(context).pop();
                   emptyTile = 0;
