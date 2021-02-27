@@ -17,8 +17,9 @@ flutter run
 ```
 
 Ensuite, il suffit d'utiliser l'application à votre convenance.
+Vous retrouverez, au lancement de l'application, un menu pour explorer les différents exercices ainsi que le jeu de Taquin.
 
-Voici, un petit aperçu des fonctionnalités de l'application :
+Voici, un petit aperçu des fonctionnalités du jeu de Taquin :
 
 - Régler la taille du taquin c'est-à-dire le nombre de cases par côté
 - Choisir la difficulté i.e. le nombre de déplacements réalisés pour mélanger. (50 fois la longueur du côté multiplié par 1,4 ou 9 (respectivement facile, normal, difficile))
@@ -32,5 +33,7 @@ Voici, un petit aperçu des fonctionnalités de l'application :
 - Indiquer au joueur lorsqu'il a gagné
 - Annuler le dernier coup joué (autant de coups que l'on souhaite en appuyant plusieurs fois d'affilée),
 - Remélanger la grille
+
+
 
 
